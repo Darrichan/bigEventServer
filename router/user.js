@@ -1,0 +1,16 @@
+const express = require('express')
+const router = express.Router()
+
+// 导入用户路由处理函数对应的模块
+const user_handler = require('../router_handler/user')
+
+// 中间件验证
+const expressJoi = require('@escook/express-joi')
+const { reg_login_schema } = require('../schema/user')
+    // 注册新用户
+router.post('/reguser', expressJoi(reg_login_schema), user_handler.reguser)
+
+// 登录
+router.post('/login', expressJoi(reg_login_schema), user_handler.login)
+
+module.exports = router
